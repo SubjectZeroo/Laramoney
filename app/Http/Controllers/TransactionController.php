@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\TransactionCategory;
 use Illuminate\Http\Request;
+use \App\Tables\TransactionsTable;
 
 class TransactionController extends Controller
 {
@@ -13,6 +17,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+
         return view('transaction.index');
     }
 
@@ -23,7 +28,12 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'transactionCategories' => TransactionCategory::all(),
+            'categories'     =>     Category::all(),
+            'subCategories'     =>  SubCategory::all(),
+        ];
+        return view('transaction.create')->with($data);
     }
 
     /**
