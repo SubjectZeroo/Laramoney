@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class AccountController extends Controller
 {
@@ -11,8 +13,20 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+
+            $data = Account::select('*');
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('Actions', 'account/datatables/actions')
+                ->rawColumns(['Actions'])
+                ->make(true);
+        }
+
+
         return view('account.index');
     }
 

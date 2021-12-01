@@ -1,5 +1,8 @@
 window._ = require('lodash');
 
+window.Flatpickr = require('flatpickr');
+const Spanish = require("flatpickr/dist/l10n/es.js").default.es;
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -11,6 +14,16 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    require('datatables.net-bs4');
+    require('datatables.net-responsive-bs4');
+    require('datatables.net-buttons-bs4');
+    require('datatables.net-buttons/js/buttons.html5.js');
+    require('datatables.net-buttons/js/buttons.print.js');
+    require('datatables.net-buttons/js/buttons.colVis.js')();
+    require('datatables.net-datetime');
+
+    $('.dropdown-toggle').dropdown()
 } catch (e) {}
 
 /**
@@ -39,3 +52,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+
+require('./account');
+require('./budget');
+require('./category');
+require('./goal');
+require('./transaction');

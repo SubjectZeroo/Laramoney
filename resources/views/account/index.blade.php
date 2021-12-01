@@ -25,8 +25,15 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-
+            @include('account.datatables.table')
         </div>
     </div>
 
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@stop
+
+@section('js')
+    <script src="{{ asset('js/app.js') }}"></script>
 @stop

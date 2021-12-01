@@ -30,15 +30,90 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
-@stop
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>$0.00</h3>
+                    <p>Income</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <a class="small-box-footer">
+                    <i class="fas fa-sync-alt"></i>
+                    This Month ()
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>$0.00</h3>
+                    <p>Expense</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-arrow-down"></i>
+                </div>
+                <a class="small-box-footer">
+                    <i class="fas fa-sync-alt"></i>
+                    This Month ()
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>$0.00</h3>
+                    <p>Income</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <a class="small-box-footer">
+                    <i class="fas fa-sync-alt"></i>
+                    Today ()
+                </a>
+            </div>
 
-{{-- @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>$0.00</h3>
+                    <p>Expense</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <a class="small-box-footer">
+                    <i class="fas fa-sync-alt"></i>
+                    Today ()
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="lead">Income VS Expense 2021</h2>
+                </div>
+                <div class="card-body"></div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="lead">Account Balance 2021</h2>
+                </div>
+                <div class="card-body"></div>
+            </div>
+        </div>
+    </div>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @stop
 
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
-@stop --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+@stop
