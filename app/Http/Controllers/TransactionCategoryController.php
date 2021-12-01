@@ -23,7 +23,7 @@ class TransactionCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('transaction-category.create');
     }
 
     /**
