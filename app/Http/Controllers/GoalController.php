@@ -23,7 +23,7 @@ class GoalController extends Controller
      */
     public function create()
     {
-        //
+        return view('goal.create');
     }
 
     /**
