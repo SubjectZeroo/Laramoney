@@ -25,4 +25,9 @@ class Transaction extends Model
         'description',
         'file',
     ];
+
+    public function deleteData($id)
+    {
+        return static::find($id)->delete();
+    }
 }

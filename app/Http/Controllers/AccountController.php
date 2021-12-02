@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAccountRequest;
+use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountController extends Controller
 {
@@ -15,6 +18,9 @@ class AccountController extends Controller
      */
     public function index(Request $request)
     {
+        if (session('success_message')) {
+            Alert::toast(session('success_message'), 'success');
+        }
         if ($request->ajax()) {
 
             $data = Account::select('*');
@@ -46,9 +52,12 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAccountRequest $request)
     {
-        //
+
+
+        $account = Account::create($request->validated());
+        return redirect()->route('accounts.index')->withSuccessMessage('Account Created');
     }
 
     /**
@@ -68,9 +77,9 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Account $account)
     {
-        //
+        return view('account.edit', compact('account'));
     }
 
     /**
@@ -80,9 +89,11 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAccountRequest $request, Account $account)
     {
-        //
+        $account->update($request->validated());
+
+        return redirect()->route('accounts.index')->withSuccessMessage('Account Updated');
     }
 
     /**
@@ -93,6 +104,8 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $account = new Account();
+        $account->deleteData($id);
+        return response()->json(['success' => 'Account Deleted']);
     }
 }

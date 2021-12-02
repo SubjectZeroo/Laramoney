@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Transaction;
 use App\Models\TransactionCategory;
 use Illuminate\Http\Request;
 use \App\Tables\TransactionsTable;
@@ -89,6 +90,8 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $transaction = new Transaction();
+        $transaction->deleteData($id);
+        return response()->json(['success' => 'Transaction Deleted']);
     }
 }

@@ -28,5 +28,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('/accounts', App\Http\Controllers\AccountController::class);
     Route::resource('/budgets', App\Http\Controllers\BudgetController::class);
     Route::resource('/goals', App\Http\Controllers\GoalController::class);
-    Route::resource('/transaction-categories', App\Http\Controllers\TransactionCategoryController::class);
+    Route::resource('/categories', App\Http\Controllers\CategoryController::class);
 });

@@ -21,5 +21,11 @@ class Goal extends Model
         'balance',
         'amount',
         'deposit',
+        'deadline',
     ];
+
+    public function deleteData($id)
+    {
+        return static::find($id)->delete();
+    }
 }

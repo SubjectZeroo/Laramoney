@@ -272,8 +272,8 @@ return [
             'icon' => 'fas fa-bullseye'
         ],
         [
-            'text' => 'Transaction Category',
-            'route'  => 'transaction-categories.index',
+            'text' => 'Categories',
+            'route'  => 'categories.index',
             'icon' => 'far fa-list-alt'
         ],
         [

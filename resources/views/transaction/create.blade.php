@@ -21,8 +21,8 @@
 @section('content')
     <div class="card">
         <form method="POST" action="{{ route('transactions.store') }}">
+            @csrf
             <div class="card-body">
-
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>

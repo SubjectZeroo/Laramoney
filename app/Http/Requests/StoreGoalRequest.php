@@ -25,9 +25,12 @@ class StoreGoalRequest extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'category_id' => 'required|exists:categories,id',
+            'account_id' => 'required|exists:accounts,id',
+            'name' => 'required|string',
+            'balance' => 'required|numeric',
             'amount' => 'required|numeric',
-            'description' =>  ['nullable', 'string', 'max:255'],
+            'deposit' => 'nullable|numeric',
+            'deadline' =>  'date',
         ];
     }
 }

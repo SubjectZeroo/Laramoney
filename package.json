@@ -28,6 +28,7 @@
         "datatables.net-datetime": "^1.1.1",
         "datatables.net-responsive-bs4": "^2.2.9",
         "drmonty-datatables-colvis": "^1.1.2",
-        "flatpickr": "^4.6.9"
+        "flatpickr": "^4.6.9",
+        "sweetalert2": "^11.2.1"
     }
 }

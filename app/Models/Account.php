@@ -20,4 +20,9 @@ class Account extends Model
         'account_number',
         'description'
     ];
+
+    public function deleteData($id)
+    {
+        return static::find($id)->delete();
+    }
 }

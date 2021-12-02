@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGoalRequest;
+use App\Models\Account;
+use App\Models\Goal;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GoalController extends Controller
 {
@@ -11,8 +16,32 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (session('success_message')) {
+            Alert::toast(session('success_message'), 'success');
+        }
+
+        if ($request->ajax()) {
+
+            $data = Goal::join("users", "users.id", "=", "goals.user_id")
+                ->join("accounts", "accounts.id", "=", "goals.account_id")
+                ->select(
+                    "goals.id",
+                    "goals.name",
+                    "goals.balance",
+                    "goals.amount",
+                    "accounts.name AS account_name",
+                    "users.name AS user_name"
+                );
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('Actions', 'goal/datatables/actions')
+                ->rawColumns(['Actions'])
+                ->make(true);
+        }
+
         return view('goal.index');
     }
 
@@ -23,7 +52,8 @@ class GoalController extends Controller
      */
     public function create()
     {
-        return view('goal.create');
+        $accounts = Account::all();
+        return view('goal.create', compact('accounts'));
     }
 
     /**
@@ -32,9 +62,12 @@ class GoalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGoalRequest $request)
     {
-        //
+
+        $goal = auth()->user()->goals()->create($request->validated());
+
+        return redirect()->route('goal.index')->withSuccessMessage('Goal Created');
     }
 
     /**
@@ -79,6 +112,8 @@ class GoalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $goal = new Goal();
+        $goal->deleteData($id);
+        return response()->json(['success' => 'Goal Deleted']);
     }
 }

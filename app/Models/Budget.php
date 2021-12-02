@@ -19,4 +19,9 @@ class Budget extends Model
         'amount',
         'description'
     ];
+
+    public function deleteData($id)
+    {
+        return static::find($id)->delete();
+    }
 }

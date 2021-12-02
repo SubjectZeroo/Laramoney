@@ -20,7 +20,8 @@ class CreateGoalsTable extends Migration
             $table->string('name');
             $table->decimal('balance');
             $table->decimal('amount');
-            $table->decimal('deposit');
+            $table->decimal('deposit')->nullable();
+            $table->date('deadline');
             $table->timestamps();
         });
     }

@@ -33,7 +33,6 @@ jQuery(function (){
         },
         "columns": [
             {data: 'name', name:'name'},
-            {data: 'identification', name:'identification'},
             {
                 data: 'Actions',
                 orderable: false,
@@ -41,27 +40,6 @@ jQuery(function (){
                 // sClass: 'text-center'
             }
         ],
-
-        "language": {
-            "lengthMenu": "Mostrar " + `
-               <select class="custom-select custom-select-sm form-control form-control-sm">
-                   <option value='10'>10</option>
-                   <option value='25'>25</option>
-                   <option value='50'>50</option>
-                   <option value='100'>100</option>
-                   <option value='-1'>All</option>
-               </select> ` + " registros por paginas",
-            "zeroRecords": "No hay registros - Disculpe",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No se encontraron registros",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            'search': 'Buscar',
-            'paginate': {
-                'next': 'Siguiente',
-                'previous': 'Anterior'
-            }
-        },
-
     });
 
 
@@ -70,54 +48,54 @@ jQuery(function (){
 
 
 
-    // $('body').on('click', '#getDriverId', function (e) {
-    //     e.preventDefault();
-    //     var driver_id = $(this).data("id");
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     Swal.fire({
-    //         title: 'Estas seguro de eliminar este Conductor?',
-    //         text: "No vas a poder recuperar esta informacion!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#5851d8',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Si, Eliminalo!',
-    //         cancelButtonText: 'Cancelar'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             $.ajax({
-    //                 type: "DELETE",
-    //                 url: "drivers" + '/' + driver_id,
-    //                 data: {
-    //                     '_token': $('input[name=_token]').val()
-    //                 },
+    $('body').on('click', '#getCategoryId', function (e) {
+        e.preventDefault();
+        var category_id = $(this).data("id");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        Swal.fire({
+            title: 'Are you sure to delete this Category?',
+            text: "You will not be able to recover this information!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#5851d8',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Eliminate it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "categories" + '/' + category_id,
+                    data: {
+                        '_token': $('input[name=_token]').val()
+                    },
 
-    //                 success: function (data) {
-    //                     Swal.fire({
-    //                         toast: true,
-    //                         position: 'top-end',
-    //                         icon: 'success',
-    //                         title: 'Conductor eliminado',
-    //                         showConfirmButton: false,
+                    success: function (data) {
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Category removed',
+                            showConfirmButton: false,
 
-    //                         timer: 1500
-    //                     })
-    //                     $('#table-drivers').DataTable().ajax.reload();
-    //                 },
-    //                 error: function (data) {
+                            timer: 1500
+                        })
+                        $('#table-categories').DataTable().ajax.reload();
+                    },
+                    error: function (data) {
 
-    //                     console.log('Error:', data);
-    //                 }
-    //             });
-    //         } else {
-    //             return false;
-    //         }
-    //     })
-    // });
+                        console.log('Error:', data);
+                    }
+                });
+            } else {
+                return false;
+            }
+        })
+    });
 
 });
 

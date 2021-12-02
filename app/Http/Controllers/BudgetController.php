@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budget;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BudgetController extends Controller
 {
@@ -11,8 +14,28 @@ class BudgetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (session('success_message')) {
+            Alert::toast(session('success_message'), 'success');
+        }
+        if ($request->ajax()) {
+
+            $data = Budget::join("users", "users.id", "=", "budgets.user_id")
+                ->join("categories", "categories.id", "=", "budgets.category_id")
+                ->select(
+                    "budgets.id",
+                    "budgets.amount",
+                    "users.name AS user_name",
+                    "categories.name AS category_name",
+                );
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('Actions', 'budget/datatables/actions')
+                ->rawColumns(['Actions'])
+                ->make(true);
+        }
         return view('budget.index');
     }
 
@@ -79,6 +102,8 @@ class BudgetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $budget = new Budget();
+        $budget->deleteData($id);
+        return response()->json(['success' => 'Budget Deleted']);
     }
 }

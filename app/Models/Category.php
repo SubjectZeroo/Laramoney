@@ -15,9 +15,12 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'transaction_category_id',
-        'description',
-        'amount',
+        'name',
         'description'
     ];
+
+    public function deleteData($id)
+    {
+        return static::find($id)->delete();
+    }
 }

@@ -2,7 +2,7 @@ window._ = require('lodash');
 
 window.Flatpickr = require('flatpickr');
 const Spanish = require("flatpickr/dist/l10n/es.js").default.es;
-
+window.Swal = require('sweetalert2');
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
