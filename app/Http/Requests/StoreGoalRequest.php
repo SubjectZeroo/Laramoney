@@ -24,13 +24,12 @@ class StoreGoalRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'account_id' => 'required|exists:accounts,id',
             'name' => 'required|string',
             'balance' => 'required|numeric',
             'amount' => 'required|numeric',
             'deposit' => 'nullable|numeric',
-            'deadline' =>  'date',
+            'deadline' =>  'required',
         ];
     }
 }

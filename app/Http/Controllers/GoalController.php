@@ -67,7 +67,7 @@ class GoalController extends Controller
 
         $goal = auth()->user()->goals()->create($request->validated());
 
-        return redirect()->route('goal.index')->withSuccessMessage('Goal Created');
+        return redirect()->route('goals.index')->withSuccessMessage('Goal Created');
     }
 
     /**

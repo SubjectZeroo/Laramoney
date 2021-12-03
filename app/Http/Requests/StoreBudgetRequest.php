@@ -24,9 +24,10 @@ class StoreBudgetRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
             'amount' => 'required|numeric',
+            'from_date' => 'required',
+            'to_date' => 'required',
             'description' =>  ['nullable', 'string', 'max:255'],
         ];
     }

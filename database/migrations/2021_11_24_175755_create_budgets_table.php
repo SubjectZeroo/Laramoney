@@ -18,7 +18,9 @@ class CreateBudgetsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->decimal('amount');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->date('from_date');
+            $table->date('to_date');
             $table->timestamps();
         });
     }

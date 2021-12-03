@@ -26,30 +26,55 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="amount">Amount</label>
-                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount">
+                        <input type="text" class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}"
+                            id="amount" name="amount" placeholder="Amount" value="{{ old('amount') }}">
+                        @error('amount')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('amount') }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="name">Date</label>
-                        <input type="date" class="form-control" id="date" name="datte">
+                        <label for="category_id">Categories</label>
+                        <select id="category_id" name="category_id"
+                            class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}">
+                            <option selected>Choose...</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('category_id') }}
+                            </div>
+                        @enderror
                     </div>
-
-
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputState">Type Transaction</label>
-                        <select id="transaction_category_id" name="transaction_category_id" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
+                        <label for="from_date">From Date</label>
+                        <input type="text" class="form-control {{ $errors->has('from_date') ? 'is-invalid' : '' }}"
+                            id="from_date" name="from_date" value="{{ old('from_date') }}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="sub_category_id">Sub Category</label>
-                        <select id="sub_category_id" name="sub_category_id" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
+                        <label for="to_date">To Date</label>
+                        <input type="text" class="form-control {{ $errors->has('to_date') ? 'is-invalid' : '' }}"
+                            id="to_date" name="to_date" value="{{ old('to_date') }}">
+                        @error('to_date')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('to_date') }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" placeholder="Description"
+                            value="{{ old('description') }}"></textarea>
                     </div>
                 </div>
             </div>
@@ -58,4 +83,11 @@
             </div>
         </form>
     </div>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@stop
+
+@section('js')
+    <script src="{{ asset('js/app.js') }}"></script>
 @stop

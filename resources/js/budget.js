@@ -1,5 +1,8 @@
 jQuery(function (){
 
+    flatpickr("#from_date", {});
+    flatpickr("#to_date", {});
+
     var tableBudgets = $('#table-budgets').DataTable({
         dom: 'lBfrtip',
         buttons: [{

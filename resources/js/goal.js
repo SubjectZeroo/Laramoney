@@ -1,5 +1,6 @@
 jQuery(function (){
 
+    flatpickr("#deadline", {});
 
     var tableGoals = $('#table-goals').DataTable({
         dom: 'lBfrtip',

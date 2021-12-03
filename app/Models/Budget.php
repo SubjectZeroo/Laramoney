@@ -17,6 +17,8 @@ class Budget extends Model
         'user_id',
         'category_id',
         'amount',
+        'from_date',
+        'to_date',
         'description'
     ];
 

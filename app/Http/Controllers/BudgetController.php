@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBudgetRequest;
 use App\Models\Budget;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -46,7 +48,8 @@ class BudgetController extends Controller
      */
     public function create()
     {
-        return view('budget.create');
+        $categories = Category::all();
+        return view('budget.create', compact('categories'));
     }
 
     /**
@@ -55,9 +58,11 @@ class BudgetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBudgetRequest $request)
     {
-        //
+        $budget = auth()->user()->budgets()->create($request->validated());
+
+        return redirect()->route('budgets.index')->withSuccessMessage('Budget Created');
     }
 
     /**

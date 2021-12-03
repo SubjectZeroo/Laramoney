@@ -25,34 +25,65 @@
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="inputState">Acount</label>
-                        <select id="account" name="account_id" class="form-control">
+                        <label for="account_id">Acount</label>
+                        <select id="account_id" name="account_id"
+                            class="form-control {{ $errors->has('account_id') ? 'is-invalid' : '' }}">
                             <option selected>Choose...</option>
                             @foreach ($accounts as $account)
-                                <option value="{{ $account->id }}">
+                                <option value="{{ $account->id }}"
+                                    {{ old('account_id') == $account->id ? 'selected' : '' }}>
                                     {{ $account->name }}
                                 </option>
                             @endforeach
                         </select>
+                        @error('account_id')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('account_id') }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="amount">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
+                            name="name" placeholder="Name" value="{{ old('name') }}">
+                        @error('name')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="name">Target Date</label>
-                        <input type="date" class="form-control" id="deadline" name="deadline">
+                        <label for="deadline">Target Date</label>
+                        <input type="text" class="form-control {{ $errors->has('deadline') ? 'is-invalid' : '' }}"
+                            id="deadline" name="deadline" value="{{ old('deadline') }}">
+                        @error('deadline')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('deadline') }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="amount">Opening Balance</label>
-                        <input type="text" class="form-control" id="balance" name="balance" placeholder="Opening Balance">
+                        <input type="text" class="form-control {{ $errors->has('balance') ? 'is-invalid' : '' }}"
+                            id="balance" name="balance" placeholder="Opening Balance" value="{{ old('balance') }}">
+                        @error('balance')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('balance') }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-4">
                         <label for="amount">Target</label>
-                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Target">
+                        <input type="text" class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}"
+                            id="amount" name="amount" placeholder="Target" value="{{ old('amount') }}">
+                        @error('amount')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('amount') }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -61,4 +92,11 @@
             </div>
         </form>
     </div>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@stop
+
+@section('js')
+    <script src="{{ asset('js/app.js') }}"></script>
 @stop
