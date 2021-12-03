@@ -15,15 +15,16 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('account_id')->constrained()->onDelete('cascade');
             $table->foreignId('transaction_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->decimal('amount');
             $table->string('reference');
-            $table->text('description');
-            $table->string('file');
+            $table->text('description')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->date('transaction_date');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBudgetRequest;
+use App\Http\Requests\UpdateBudgetRequest;
 use App\Models\Budget;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class BudgetController extends Controller
     {
         $budget = auth()->user()->budgets()->create($request->validated());
 
-        return redirect()->route('budgets.index')->withSuccessMessage('Budget Created');
+        return redirect()->route('budget.index')->withSuccessMessage('Budget Created');
     }
 
     /**
@@ -82,9 +83,10 @@ class BudgetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Budget $budget)
     {
-        //
+        $categories = Category::all();
+        return view('budget.edit', compact('budget', 'categories'));
     }
 
     /**
@@ -94,9 +96,10 @@ class BudgetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBudgetRequest $request, Budget $budget)
     {
-        //
+        $budget->update($request->validated());
+        return redirect()->route('budgets.index')->withSuccessMessage('Budget Updated');
     }
 
     /**

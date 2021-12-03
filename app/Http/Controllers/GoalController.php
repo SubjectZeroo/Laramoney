@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGoalRequest;
+use App\Http\Requests\UpdateGoalRequest;
 use App\Models\Account;
 use App\Models\Goal;
 use Illuminate\Http\Request;
@@ -87,9 +88,10 @@ class GoalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Goal $goal)
     {
-        //
+        $accounts = Account::all();
+        return view('goal.edit', compact('goal', 'accounts'));
     }
 
     /**
@@ -99,9 +101,10 @@ class GoalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateGoalRequest $request, Goal $goal)
     {
-        //
+        $goal->update($request->validated());
+        return redirect()->route('goals.index')->withSuccessMessage('Goal Updated');
     }
 
     /**

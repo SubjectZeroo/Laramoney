@@ -40,45 +40,84 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="date">Date</label>
-                        <input type="date" class="form-control" name="date" id="date">
+                        <input type="text" class="form-control" name="transaction_date" id="transaction_date">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="inputState">Acount</label>
-                        <select id="account" name="account" class="form-control">
+                        <label for="account_id">Acount</label>
+                        <select id="account_id" name="account_id"
+                            class="form-control {{ $errors->has('account_id') ? 'is-invalid' : '' }}">
                             <option selected>Choose...</option>
-                            <option>...</option>
+                            @foreach ($accounts as $account)
+                                <option value="{{ $account->id }}"
+                                    {{ old('account_id') == $account->id ? 'selected' : '' }}>
+                                    {{ $account->name }}
+                                </option>
+                            @endforeach
                         </select>
+                        @error('account_id')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('account_id') }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="inputState">Type Transaction</label>
-                        <select id="transaction_category_id" name="transaction_category_id" class="form-control">
+                        <label for="transaction_category_id">Type Transaction</label>
+                        <select id="transaction_category_id" name="transaction_category_id"
+                            class="form-control {{ $errors->has('transaction_category_id') ? 'is-invalid' : '' }}">
                             <option selected>Choose...</option>
-                            <option>...</option>
+                            @foreach ($transactionCategories as $transactionCategory)
+                                <option value="{{ $transactionCategory->id }}"
+                                    {{ old('transaction_category_id') == $transactionCategory->id ? 'selected' : '' }}>
+                                    {{ $transactionCategory->name }}
+                                </option>
+                            @endforeach
                         </select>
+                        @error('transaction_category_id')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('transaction_category_id') }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="category_id">Category</label>
-                        <select id="category_id" name="category_id" class="form-control">
+                        <label for="category_id">Categories</label>
+                        <select id="category_id" name="category_id"
+                            class="form-control {{ $errors->has('category_id') ? 'is-invalid' : '' }}">
                             <option selected>Choose...</option>
-                            <option>...</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
                         </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="sub_category_id">Sub Category</label>
-                        <select id="sub_category_id" name="sub_category_id" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
+                        @error('category_id')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('category_id') }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
-
-
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" placeholder="Description"
+                            value="{{ old('description') }}"></textarea>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Save Transaction</button>
             </div>
         </form>
     </div>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@stop
+
+@section('js')
+    <script src="{{ asset('js/app.js') }}"></script>
+    @include('sweetalert::alert')
 @stop

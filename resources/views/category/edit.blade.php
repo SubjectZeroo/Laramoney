@@ -19,23 +19,32 @@
 @stop
 @section('content')
     <div class="card">
-        <form method="POST" action="{{ route('category.store') }}">
+        <form method="POST" action="{{ route('categories.update', $category->id) }}">
+            @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="amount">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                        <label for="amount">Category Name</label>
+                        <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
+                            name="name" placeholder="Category Name" value="{{ old('name', $category->name) }}">
+                        @error('name')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="   form-row">
                     <div class="form-group col-md-12">
                         <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description"></textarea>
+                        <textarea class="form-control" name="description"
+                            id="description">{{ $category->description }}</textarea>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Save Goal</button>
+                <button type="submit" class="btn btn-primary">Update Goal</button>
             </div>
         </form>
     </div>

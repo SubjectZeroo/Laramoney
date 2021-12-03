@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTransactionRequest;
+use App\Models\Account;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Transaction;
 use App\Models\TransactionCategory;
 use Illuminate\Http\Request;
 use \App\Tables\TransactionsTable;
+use Yajra\DataTables\DataTables;
 
 class TransactionController extends Controller
 {
@@ -16,8 +19,31 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->ajax()) {
+
+            $data = Transaction::join("users", "users.id", "=", "transactions.user_id")
+                ->join("categories", "categories.id", "=", "transactions.category_id")
+                ->join("accounts", "accounts.id", "=", "transactions.account_id")
+                ->join("transaction_categories", "transaction_categories.id", "=", "transactions.transaction_category_id")
+                ->select(
+                    "transactions.id",
+                    "transactions.name",
+                    "transactions.amount",
+                    "transactions.reference",
+                    "categories.name AS category_name",
+                    "accounts.name AS account_name",
+                    "transaction_categories.name AS transaction_category_name",
+                );
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('Actions', 'transaction/datatables/actions')
+                ->rawColumns(['Actions'])
+                ->make(true);
+        }
 
         return view('transaction.index');
     }
@@ -32,7 +58,7 @@ class TransactionController extends Controller
         $data = [
             'transactionCategories' => TransactionCategory::all(),
             'categories'     =>     Category::all(),
-            'subCategories'     =>  SubCategory::all(),
+            'accounts'     =>     Account::all(),
         ];
         return view('transaction.create')->with($data);
     }
@@ -43,9 +69,12 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTransactionRequest $request)
     {
-        //
+
+        $transaction = auth()->user()->transactions()->create($request->validated());
+
+        return redirect()->route('transactions.index')->withSuccessMessage('Transaction Created');
     }
 
     /**

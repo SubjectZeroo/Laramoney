@@ -1,6 +1,6 @@
 jQuery(function (){
 
-
+    flatpickr("#transaction_date", {});
     var tableTransactions = $('#table-transactions').DataTable({
         dom: 'lBfrtip',
         buttons: [{
@@ -33,7 +33,12 @@ jQuery(function (){
         },
         "columns": [
             {data: 'name', name:'name'},
-            {data: 'identification', name:'identification'},
+            {data: 'amount', name:'amount'},
+            {data: 'reference', name:'reference'},
+            {data: 'transaction_category_name', name:'transaction_category_name'},
+            {data: 'category_name', name:'category_name'},
+            {data: 'account_name', name:'account_name'},
+            {data: 'user_name', name:'user_name'},
             {
                 data: 'Actions',
                 orderable: false,
@@ -63,12 +68,6 @@ jQuery(function (){
         },
 
     });
-
-
-
-
-
-
 
     // $('body').on('click', '#getDriverId', function (e) {
     //     e.preventDefault();
