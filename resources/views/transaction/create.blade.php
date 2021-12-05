@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Save Transaction')
+@section('title', 'New Transaction')
 
 @section('content_header')
     <div class="d-flex justify-content-between align-items-center">
@@ -24,24 +24,44 @@
             @csrf
             <div class="card-body">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                        <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
+                            name="name" placeholder="Name" value="{{ old('name') }}">
+                        @error('name')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @enderror
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="amount">Amount</label>
-                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount">
+                    <div class="form-group col-md-4">
+                        <label for="validationDefaultUsername">Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="amount">$</span>
+                            </div>
+                            <input type="text" class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}"
+                                id="amount" name="amount" placeholder="Amount" aria-describedby="inputGroupPrepend2"
+                                value="{{ old('amount') }}">
+                        </div>
+                        @error('amount')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('amount') }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="reference">Reference</label>
+                        <input type="text" class="form-control {{ $errors->has('reference') ? 'is-invalid' : '' }}"
+                            id="reference" name="reference" placeholder="Reference" value="{{ old('reference') }}">
+                        @error('reference')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('reference') }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="reference">Reference</label>
-                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="date">Date</label>
-                        <input type="text" class="form-control" name="transaction_date" id="transaction_date">
-                    </div>
                     <div class="form-group col-md-4">
                         <label for="account_id">Acount</label>
                         <select id="account_id" name="account_id"
@@ -60,8 +80,6 @@
                             </div>
                         @enderror
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="transaction_category_id">Type Transaction</label>
                         <select id="transaction_category_id" name="transaction_category_id"
@@ -98,14 +116,29 @@
                             </div>
                         @enderror
                     </div>
+
+
+
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class=" form-group col-md-4">
+                        <label for="date">Date</label>
+                        <input type="text"
+                            class="form-control {{ $errors->has('transaction_date') ? 'is-invalid' : '' }}"
+                            name="transaction_date" id="transaction_date" value="{{ old('transaction_date') }}">
+                        @error('transaction_date')
+                            <div class=" invalid-feedback">
+                                {{ $errors->first('transaction_date') }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-8">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" id="description" placeholder="Description"
                             value="{{ old('description') }}"></textarea>
                     </div>
                 </div>
+
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Save Transaction</button>

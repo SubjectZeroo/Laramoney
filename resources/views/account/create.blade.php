@@ -1,72 +1,78 @@
-@extends('adminlte::page')
-
-@section('title', 'New Account')
-
-@section('content_header')
-    <div class="d-flex justify-content-between align-items-center">
-        <div>
-            <h1 class="m-0 text-dark">
-                New Account
-            </h1>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('home') }}"> Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active"> New Account</li>
-            </ol>
+<x-layout>
+    @section('title', 'New Account')
+    @section('content_header')
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="m-0 text-dark">
+                    New Account
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('home') }}"> Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active"> New Account</li>
+                </ol>
+            </div>
         </div>
-    </div>
-@stop
+    @stop
+    @section('content')
+        <div class="card">
+            <form method="POST" action="{{ route('accounts.store') }}">
+                @csrf
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control  {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+                            @error('name')
+                                <div class=" invalid-feedback">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="validationDefaultUsername">Balance</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="balance">$</span>
+                                </div>
+                                <input type="text" class="form-control {{ $errors->has('balance') ? 'is-invalid' : '' }}"
+                                    id="balance" name="balance" placeholder="balance" aria-describedby="inputGroupPrepend2"
+                                    value="{{ old('balance') }}">
+                                @error('balance')
+                                    <div class=" invalid-feedback">
+                                        {{ $errors->first('balance') }}
+                                    </div>
+                                @enderror
+                            </div>
 
-@section('content')
-    <div class="card">
-        <form method="POST" action="{{ route('accounts.store') }}">
-            @csrf
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control  {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
-                            name="name" placeholder="Name" value="{{ old('name') }}">
-                        @error('name')
-                            <div class=" invalid-feedback">
-                                {{ $errors->first('name') }}
-                            </div>
-                        @enderror
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="reference">Account Number</label>
+                            <input type="text"
+                                class="form-control {{ $errors->has('account_number') ? 'is-invalid' : '' }}"
+                                id="account_number" name="account_number" placeholder="Account Number"
+                                value="{{ old('account_number') }}">
+                            @error('balance')
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('balance') }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="amount">Balance</label>
-                        <input type="text" class="form-control  {{ $errors->has('balance') ? 'is-invalid' : '' }}"
-                            id="balance" name="balance" placeholder="Balance" value="{{ old('balance') }}">
-                        @error('balance')
-                            <div class="invalid-feedback">
-                                {{ $errors->first('balance') }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="reference">Account Number</label>
-                        <input type="text" class="form-control {{ $errors->has('account_number') ? 'is-invalid' : '' }}"
-                            id="account_number" name="account_number" placeholder="Account Number"
-                            value="{{ old('account_number') }}">
-                        @error('balance')
-                            <div class="invalid-feedback">
-                                {{ $errors->first('balance') }}
-                            </div>
-                        @enderror
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" name="description" id="description" placeholder="Description"
+                                value="{{ old('description') }}"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" placeholder="Description"
-                            value="{{ old('description') }}"></textarea>
-                    </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save Account</button>
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Save Account</button>
-            </div>
-        </form>
-    </div>
-@stop
+            </form>
+        </div>
+    @stop
+</x-layout>

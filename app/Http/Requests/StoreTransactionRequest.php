@@ -29,7 +29,7 @@ class StoreTransactionRequest extends FormRequest
             'reference' =>  ['required', 'string', 'max:255'],
             'transaction_date' =>  'required',
             'account_id' => 'required|exists:accounts,id',
-            'transaction_category_id' => 'required|exists:transaction_categories,id',
+            'transaction_category_id' => 'required|     exists:transaction_categories,id',
             'category_id' => 'required|exists:categories,id',
             'description' =>  ['nullable', 'string', 'max:255'],
         ];

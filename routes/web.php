@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     // Route::resource('/incomes', [App\Http\Controllers\IncomeController::class, 'index'])->name('income');
     // Route::resource('/expenses', [App\Http\Controllers\ExpenseController::class, 'index'])->name('expense');
     Route::resource('/transactions', App\Http\Controllers\TransactionController::class);
+    Route::get('/transactions/income/total', [App\Http\Controllers\TransactionController::class, 'IncomeTotalByMonth']);
     Route::resource('/accounts', App\Http\Controllers\AccountController::class);
     Route::resource('/budgets', App\Http\Controllers\BudgetController::class);
     Route::resource('/goals', App\Http\Controllers\GoalController::class);

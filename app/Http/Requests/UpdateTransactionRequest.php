@@ -13,7 +13,7 @@ class UpdateTransactionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class UpdateTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' =>  ['required', 'string', 'max:255'],
+            'amount' => 'required|numeric',
+            'reference' =>  ['required', 'string', 'max:255'],
+            'transaction_date' =>  'required',
+            'account_id' => 'required|exists:accounts,id',
+            'transaction_category_id' => 'required|     exists:transaction_categories,id',
+            'category_id' => 'required|exists:categories,id',
+            'description' =>  ['nullable', 'string', 'max:255'],
         ];
     }
 }
