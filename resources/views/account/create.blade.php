@@ -46,7 +46,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                         </div>
                         <div class="form-group col-md-4">
                             <label for="reference">Account Number</label>
