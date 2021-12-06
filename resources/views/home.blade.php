@@ -61,7 +61,7 @@
                         <p>${{ $totalDayExpense }}</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-arrow-up"></i>
+                        <i class="fas fa-arrow-down"></i>
                     </div>
                     <a class="small-box-footer">
                         <i class="fas fa-sync-alt"></i>
@@ -74,7 +74,10 @@
                     <div class="card-header">
                         <h2 class="lead">Income VS Expense 2021</h2>
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        <!-- Chart's container -->
+                        <div id="income_vs_expense" style="height: 300px;"></div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -82,9 +85,39 @@
                     <div class="card-header">
                         <h2 class="lead">Account Balance 2021</h2>
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        <!-- Chart's container -->
+                        <div id="account_balance_chart" style="height: 300px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
+    @stop
+    @section('js')
+        <!-- Charting library -->
+        <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+        <!-- Chartisan -->
+        <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+        <!-- Your application script -->
+        <script>
+            const incomeVsExpense = new Chartisan({
+                el: '#income_vs_expense',
+                url: "@chart('income_vs_expense_chart')",
+                hooks: new ChartisanHooks()
+                    .legend()
+                    .colors()
+                    .datasets(['line', 'line'])
+                    .tooltip(),
+            });
+            const accountBalance = new Chartisan({
+                el: '#account_balance_chart',
+                url: "@chart('account_balance_chart')",
+                hooks: new ChartisanHooks()
+                    .legend()
+                    .colors()
+                    .datasets(['bar'])
+                    .tooltip(),
+            });
+        </script>
     @stop
 </x-layout>
