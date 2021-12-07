@@ -21,36 +21,21 @@ class AccountBalanceChart extends BaseChart
     {
 
         config()->set('database.connections.mysql.strict', false);
+        $balanceAccounts = DB::select("SELECT p.name,COALESCE(a.amount,0) as income,COALESCE(b.amount,0) as expense, COALESCE(p.balance+(COALESCE(a.amount,0)-COALESCE(b.amount,0)),0) as balance from accounts as p left join (select account_id,sum(amount) as amount from transactions where transaction_category_id=1 and year(transaction_date)=" . date('Y') . " group by account_id) as a on a.account_id = p.id left join (select account_id,sum(amount) as amount from transactions where transaction_category_id=2 and year(transaction_date)=" . date('Y') . " group by account_id) as b on b.account_id = p.id group by p.id");
 
-        $balanceIncomeAccounts =  DB::table('transactions')
-            ->join('accounts', 'accounts.id', '=', 'transactions.account_id')
-            ->select('accounts.name as account_name', DB::raw('sum(transactions.amount) as sum'))
-            ->where('transactions.transaction_category_id', '=', '1')
-            ->groupBy('accounts.name')
-            ->get();
-
-        // $balanceExpenseAccounts =  DB::table('transactions')
-        //     ->join('accounts', 'accounts.id', '=', 'transactions.account_id')
-        //     ->select('accounts.name as account_name', DB::raw('sum(transactions.amount) as sum'))
-        //     ->where('transactions.transaction_category_id', '=', '2')
-        //     ->groupBy('accounts.name')
-        //     ->get();
 
         $labels = [];
-        $count = [];
-
-        foreach ($balanceIncomeAccounts as $balanceIncomeAccount) {
-            array_push($labels, $balanceIncomeAccount->account_name);
-            array_push($count,  $balanceIncomeAccount->sum);
+        $expense = [];
+        $income = [];
+        foreach ($balanceAccounts as $balanceAccount) {
+            array_push($labels, $balanceAccount->name);
+            array_push($income,  $balanceAccount->income);
+            array_push($expense,  $balanceAccount->expense);
         }
-
-        // foreach ($balanceExpenseAccounts as $balanceExpenseAccount) {
-        //     array_push($labels, $balanceExpenseAccount->account_name);
-        //     array_push($count,  $balanceExpenseAccount->sum);
-        // }
 
         return Chartisan::build()
             ->labels($labels)
-            ->dataset('Account', $count);
+            ->dataset('Income', $income)
+            ->dataset('Expense', $expense);
     }
 }

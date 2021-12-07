@@ -139,46 +139,4 @@ class TransactionController extends Controller
         $transaction->deleteData($id);
         return response()->json(['success' => 'Transaction Deleted']);
     }
-
-
-
-    public function IncomeTotalByMonth()
-    {
-        $totalBalance = Transaction::select(DB::raw('sum(amount) as totalBalance'))
-            ->where('transaction_category_id', '=', '1')
-            ->get();
-
-        $year = Transaction::select(DB::raw('sum(amount) as totalYear'))
-            ->where('transaction_category_id', '=', '1')
-            ->whereYear('transaction_date', date('Y'))
-            ->get();
-
-        $month = Transaction::select(DB::raw('sum(amount) as totalMonth'))
-            ->where('transaction_category_id', '=', '1')
-            ->whereMonth('transaction_date', date('m'))
-            ->get();
-
-
-        $week = Transaction::select(DB::raw('sum(amount) as totalWeek'))
-            ->where('transaction_category_id', '=', '1')
-            ->whereRaw('YEARWEEK(curdate()) = YEARWEEK(transaction_date)')
-            ->get();
-
-        $day   = Transaction::select(DB::raw('sum(amount) as totalDay'))
-            ->where('transaction_category_id', '=', '1')
-            ->whereDate('transaction_date', date('Y-m-d'))
-            ->get();
-
-        $res['totalBalance']  = number_format($totalBalance[0]->totalBalance, 2);
-        $res['year']    = number_format($year[0]->totalYear, 2);
-        $res['month']    = number_format($month[0]->totalMonth, 2);
-        $res['week']    = number_format($week[0]->totalWeek, 2);
-        $res['day']    = number_format($day[0]->totalDay, 2);
-
-        return response($res);
-    }
-
-    public function ExpenseTotalByMonth()
-    {
-    }
 }

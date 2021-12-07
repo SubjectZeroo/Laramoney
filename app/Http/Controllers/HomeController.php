@@ -48,8 +48,7 @@ class HomeController extends Controller
             ->whereDate('transaction_date', date('Y-m-d'))
             ->sum('amount');
 
-        $totalDayExpense = Transaction::select(DB::raw('sum(amount) as totalDay'))
-            ->where('transaction_category_id', '=', '1')
+        $totalDayExpense = Transaction::where('transaction_category_id', '=', '2')
             ->whereDate('transaction_date', date('Y-m-d'))
             ->sum('amount');
 
