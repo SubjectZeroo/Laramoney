@@ -2,6 +2,9 @@
     {{-- <a title="Ver Cuenta" class="btn btn-outline-primary ml-2" href="">
         <i class="far fa-eye"></i>
     </a> --}}
+    <a title="Details Account" class="btn btn-outline-primary ml-2" href="{{ route('accounts.show', $id) }}">
+        <i class="far fa-eye"></i>
+    </a>
     <a title="Edit Account" class="btn btn-outline-success ml-2" href="{{ route('accounts.edit', $id) }}">
         <i class="far fa-edit"></i>
     </a>

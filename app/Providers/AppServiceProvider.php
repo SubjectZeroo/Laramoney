@@ -27,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
         $charts->register([
             \App\Charts\IncomeVsExpenseChart::class,
             \App\Charts\AccountBalanceChart::class,
+            \App\Charts\ExpenseByCategoryChart::class,
+            \App\Charts\IncomeByCategoryChart::class,
+            \App\Charts\BudgetByMonthChart::class,
         ]);
     }
 }

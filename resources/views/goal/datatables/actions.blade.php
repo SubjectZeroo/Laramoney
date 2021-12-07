@@ -2,6 +2,9 @@
     {{-- <a title="Ver Cuenta" class="btn btn-outline-primary ml-2" href="">
         <i class="far fa-eye"></i>
     </a> --}}
+    <a title="Deposit" class="btn btn-outline-primary ml-2" href="">
+        <i class="far fa-plus-square"></i>
+    </a>
     <a title="Edit Goal" class="btn btn-outline-success ml-2" href="{{ route('goals.edit', $id) }}">
         <i class="far fa-edit"></i>
     </a>

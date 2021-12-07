@@ -63,7 +63,7 @@ class BudgetController extends Controller
     {
         $budget = auth()->user()->budgets()->create($request->validated());
 
-        return redirect()->route('budget.index')->withSuccessMessage('Budget Created');
+        return redirect()->route('budgets.index')->withSuccessMessage('Budget Created');
     }
 
     /**

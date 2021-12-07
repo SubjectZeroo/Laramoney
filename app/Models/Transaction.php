@@ -32,4 +32,9 @@ class Transaction extends Model
     {
         return static::find($id)->delete();
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

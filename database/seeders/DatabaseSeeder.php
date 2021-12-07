@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Transaction;
+use App\Models\TransactionCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,5 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(TransactionCategorySeeder::class);
     }
 }

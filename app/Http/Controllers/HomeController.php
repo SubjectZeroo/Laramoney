@@ -32,6 +32,10 @@ class HomeController extends Controller
         //     ->whereYear('transaction_date', date('Y'))
         //     ->sum('amount');
 
+        // $totalWeekIncome = Transaction::where('transaction_category_id', '=', '1')
+        //     ->whereRaw('YEARWEEK(curdate()) = YEARWEEK(transaction_date)')
+        //     ->sum('amount');
+
         $totalMonthIncome = Transaction::where('transaction_category_id', '=', '1')
             ->whereMonth('transaction_date', date('m'))
             ->sum('amount');
@@ -39,10 +43,6 @@ class HomeController extends Controller
         $totalMonthExpense = Transaction::where('transaction_category_id', '=', '2')
             ->whereMonth('transaction_date', date('m'))
             ->sum('amount');
-
-        // $totalWeekIncome = Transaction::where('transaction_category_id', '=', '1')
-        //     ->whereRaw('YEARWEEK(curdate()) = YEARWEEK(transaction_date)')
-        //     ->sum('amount');
 
         $totalDayIncome = Transaction::where('transaction_category_id', '=', '1')
             ->whereDate('transaction_date', date('Y-m-d'))
@@ -52,11 +52,16 @@ class HomeController extends Controller
             ->whereDate('transaction_date', date('Y-m-d'))
             ->sum('amount');
 
+        $lastTransactionIncomes = Transaction::latest()->take(5)->where('transaction_category_id', '1')->get();
+        $lastTransactionExpenses = Transaction::latest()->take(5)->where('transaction_category_id', '2')->get();
+
         $data = [
             'totalMonthIncome' => $totalMonthIncome,
             'totalMonthExpense' => $totalMonthExpense,
             'totalDayIncome' => $totalDayIncome,
-            'totalDayExpense' => $totalDayExpense
+            'totalDayExpense' => $totalDayExpense,
+            'lastTransactionIncomes' => $lastTransactionIncomes,
+            'lastTransactionExpenses' => $lastTransactionExpenses
         ];
 
 

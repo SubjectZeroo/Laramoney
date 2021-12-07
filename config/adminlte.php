@@ -46,8 +46,8 @@ return [
     */
 
     'logo' => '<b>Lara</b>MONEY',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.svg',
+    'logo_img_class' => 'brand-image  elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'LaraMONEY',
@@ -65,9 +65,9 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -276,10 +276,28 @@ return [
             'route'  => 'categories.index',
             'icon' => 'far fa-list-alt'
         ],
+        // [
+        //     'text' => 'Settings',
+        //     'url'  => '#',
+        //     'icon' => 'fas fa-cogs'
+        // ],
         [
-            'text' => 'Settings',
-            'url'  => '#',
-            'icon' => 'fas fa-cogs'
+            'text'    => 'Settings',
+            'icon'    => 'fas fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Profile Settings',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Users',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Rols',
+                    'url'  => '#',
+                ],
+            ],
         ],
         // [
         //     'text'        => 'pages',
