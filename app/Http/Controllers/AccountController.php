@@ -11,6 +11,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AccountController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:accounts.create')->only('create', 'store');
+        $this->middleware('can:accounts.edit')->only('edit', 'update');
+        $this->middleware('can:accounts.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

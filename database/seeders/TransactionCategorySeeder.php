@@ -16,16 +16,16 @@ class TransactionCategorySeeder extends Seeder
     {
         DB::table('transaction_categories')->insert([
             [
-                'name' => 'Expense'
-            ],
-            [
                 'name' => 'Income'
             ],
             [
-                'name' => 'Upcoming Expense'
+                'name' => 'Expense'
             ],
             [
                 'name' => 'Upcoming Income'
+            ],
+            [
+                'name' => 'Upcoming Expense'
             ]
         ]);
     }

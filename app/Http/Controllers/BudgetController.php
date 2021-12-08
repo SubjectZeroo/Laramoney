@@ -12,6 +12,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BudgetController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:budgets.create')->only('create', 'store');
+        $this->middleware('can:budgets.edit')->only('edit', 'update');
+        $this->middleware('can:budgets.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

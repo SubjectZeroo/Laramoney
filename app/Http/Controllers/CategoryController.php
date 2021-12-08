@@ -11,6 +11,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:categories.create')->only('create', 'store');
+        $this->middleware('can:categories.edit')->only('edit', 'update');
+        $this->middleware('can:categories.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

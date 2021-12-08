@@ -17,6 +17,13 @@ use Yajra\DataTables\DataTables;
 
 class TransactionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:transactions.create')->only('create', 'store');
+        $this->middleware('can:transactions.edit')->only('edit', 'update');
+        $this->middleware('can:transactions.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

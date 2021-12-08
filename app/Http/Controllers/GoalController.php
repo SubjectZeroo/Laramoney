@@ -12,6 +12,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GoalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:goals.create')->only('create', 'store');
+        $this->middleware('can:goals.edit')->only('edit', 'update');
+        $this->middleware('can:goals.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
