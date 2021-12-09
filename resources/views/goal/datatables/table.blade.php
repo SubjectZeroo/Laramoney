@@ -6,6 +6,7 @@
             <th>Amount</th>
             <th>Account</th>
             <th>Usuario</th>
+            <th>Remaining</th>
             <th>Acciones</th>
         </tr>
     </thead>

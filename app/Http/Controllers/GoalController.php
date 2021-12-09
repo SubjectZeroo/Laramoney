@@ -38,6 +38,7 @@ class GoalController extends Controller
                     "goals.name",
                     "goals.balance",
                     "goals.amount",
+                    "goals.deposit",
                     "accounts.name AS account_name",
                     "users.name AS user_name"
                 );
@@ -45,7 +46,24 @@ class GoalController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('Actions', 'goal/datatables/actions')
-                ->rawColumns(['Actions'])
+                ->addColumn('goal', function (Goal $goal) {
+                    $target   = $goal->amount;
+                    $deposit   = $goal->deposit;
+                    $balance   = $goal->balance;
+                    $totaldeposit  = $deposit + $balance;
+                    $remaining   = $target - ($deposit + $balance);
+                    $percentage  = ($totaldeposit / $target) * 100;
+
+                    return '
+                    <div class="progress" style="height:6px;">
+                    	<div class="progress-bar progress-bar-success " role="progressbar"
+                    	aria-valuenow="' . $percentage . '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percentage . '%">
+
+                    	</div>
+                    </div>
+                    <div class="pull-left text-primary text-bold"><small>' . '$' . number_format($totaldeposit, 2) . ' (' . number_format($percentage, 2) . '%)</small></div><div class="pull-right"><small>' . '$' . number_format($remaining, 2) . '</small></div>';
+                })
+                ->rawColumns(['goal', 'Actions'])
                 ->make(true);
         }
 

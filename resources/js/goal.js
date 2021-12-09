@@ -39,6 +39,12 @@ jQuery(function (){
             {data: 'account_name', name:'accounts.name'},
             {data: 'user_name', name:'users.name'},
             {
+                data: 'goal',
+                orderable: false,
+                searchable: false,
+                // sClass: 'text-center'
+            },
+            {
                 data: 'Actions',
                 orderable: false,
                 searchable: false,
