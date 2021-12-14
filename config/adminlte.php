@@ -291,11 +291,11 @@ return [
                 ],
                 [
                     'text' => 'Users',
-                    'url'  => '#',
+                    'route'  => 'users.index',
                 ],
                 [
                     'text' => 'Rols',
-                    'url'  => '#',
+                    'route'  => 'roles.index',
                 ],
             ],
         ],

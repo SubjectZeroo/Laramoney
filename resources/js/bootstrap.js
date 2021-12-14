@@ -58,3 +58,5 @@ require('./budget');
 require('./category');
 require('./goal');
 require('./transaction');
+require('./user');
+require('./rol');

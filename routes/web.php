@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -30,4 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/budgets', App\Http\Controllers\BudgetController::class);
     Route::resource('/goals', App\Http\Controllers\GoalController::class);
     Route::resource('/categories', App\Http\Controllers\CategoryController::class);
+    Route::resource('/users', App\Http\Controllers\UserController::class);
+    Route::resource('/roles', RoleController::class)->names('roles');
 });

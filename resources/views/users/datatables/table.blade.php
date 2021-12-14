@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Email</th>
             <th>Acciones</th>
         </tr>
     </thead>

@@ -43,7 +43,7 @@ class UserController extends Controller
                 ->rawColumns(['Actions', 'Rol'])
                 ->make(true);
         }
-        return view('profiles.index');
+        return view('users.index');
     }
 
     /**
@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
 
-        return view('profiles.create', compact('roles'));
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -91,7 +91,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('profiles.show', compact("user", "activities"));
+        return view('users.show', compact("user"));
     }
 
     /**
@@ -100,9 +100,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
