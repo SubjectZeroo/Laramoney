@@ -18,6 +18,31 @@ class RoleSeeder extends Seeder
         $roleSuperAdmin = Role::create(['name' => 'Super Admin']);
         $roleNormalUser = Role::create(['name' => 'Usuario Normal']);
 
+
+        /**
+         * Permisos de transaccion
+         */
+
+        Permission::create([
+            'name' => 'users.index',
+            'description' => 'Listado de Usuarios'
+        ])->syncRoles([]);
+
+        Permission::create([
+            'name' => 'users.create',
+            'description' => 'Crear Usuarios'
+        ])->syncRoles([]);
+
+        Permission::create([
+            'name' => 'users.edit',
+            'description' => 'Editar Usuario'
+        ])->syncRoles([]);
+
+        Permission::create([
+            'name' => 'users.destroy',
+            'description' => 'Eliminar Usuario'
+        ])->syncRoles([]);
+
         /**
          * Permisos de transaccion
          */
@@ -66,29 +91,7 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar Cuenta'
         ])->syncRoles([]);
 
-        /**
-         * Permisos de accounts
-         */
 
-        Permission::create([
-            'name' => 'accounts.index',
-            'description' => 'Listado de Cuentas'
-        ])->syncRoles([$roleNormalUser]);
-
-        Permission::create([
-            'name' => 'accounts.create',
-            'description' => 'Crear Cuenta'
-        ])->syncRoles([$roleNormalUser]);
-
-        Permission::create([
-            'name' => 'accounts.edit',
-            'description' => 'Editar Cuenta'
-        ])->syncRoles([$roleNormalUser]);
-
-        Permission::create([
-            'name' => 'accounts.destroy',
-            'description' => 'Eliminar Cuenta'
-        ])->syncRoles([]);
 
         /**
          * Permisos de budgets

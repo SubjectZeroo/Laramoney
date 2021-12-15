@@ -18,16 +18,18 @@
     @stop
     @section('content')
         <div class="card">
-            <form method="POST" action="{{ route('users.store') }}">
+            <form method="POST" action="{{ route('roles.store') }}">
                 @csrf
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Rol Name</label>
-                            <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+                        <div class="form-group col-md-12">
+                            <label for="name">Nombre de Rol</label>
+                            <input name="name" id="name" type="text"
+                                class="form-control
+                                   {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                placeholder="Ingrese el nombre del rol" value="{{ old('name') }}">
                             @error('name')
-                                <div class=" invalid-feedback">
+                                <div class="invalid-feedback">
                                     {{ $errors->first('name') }}
                                 </div>
                             @enderror

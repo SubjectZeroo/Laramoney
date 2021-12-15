@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // Route::resource('/incomes', [App\Http\Controllers\IncomeController::class, 'index'])->name('income');
     // Route::resource('/expenses', [App\Http\Controllers\ExpenseController::class, 'index'])->name('expense');
+    Route::resource('/roles', App\Http\Controllers\RoleController::class);
     Route::resource('/transactions', App\Http\Controllers\TransactionController::class);
     Route::get('/transactions/income/total', [App\Http\Controllers\TransactionController::class, 'IncomeTotalByMonth']);
     Route::resource('/accounts', App\Http\Controllers\AccountController::class);
@@ -32,5 +33,4 @@ Route::middleware('auth')->group(function () {
     Route::resource('/goals', App\Http\Controllers\GoalController::class);
     Route::resource('/categories', App\Http\Controllers\CategoryController::class);
     Route::resource('/users', App\Http\Controllers\UserController::class);
-    Route::resource('/roles', RoleController::class)->names('roles');
 });

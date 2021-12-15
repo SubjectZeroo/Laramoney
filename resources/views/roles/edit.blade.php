@@ -5,13 +5,13 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1 class="m-0 text-dark">
-                    New Rol
+                    Update Rol
                 </h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('home') }}"> Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">New Rol</li>
+                    <li class="breadcrumb-item active">Update Rol</li>
                 </ol>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 @method('PUT')
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="name">Name</label>
                             <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                 id="name" name="name" placeholder="Name" value="{{ old('name', $role->name) }}">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Save User</button>
+                    <button type="submit" class="btn btn-primary">Update User</button>
                 </div>
             </form>
         </div>

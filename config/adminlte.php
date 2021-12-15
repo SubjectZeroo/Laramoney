@@ -276,14 +276,10 @@ return [
             'route'  => 'categories.index',
             'icon' => 'far fa-list-alt'
         ],
-        // [
-        //     'text' => 'Settings',
-        //     'url'  => '#',
-        //     'icon' => 'fas fa-cogs'
-        // ],
         [
             'text'    => 'Settings',
             'icon'    => 'fas fa-cogs',
+            'can'    => 'clients.index',
             'submenu' => [
                 [
                     'text' => 'Profile Settings',
