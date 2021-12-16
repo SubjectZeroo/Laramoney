@@ -75,6 +75,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
+
         return view('account.show', compact('account'));
     }
 
@@ -115,4 +116,5 @@ class AccountController extends Controller
         $account->deleteData($id);
         return response()->json(['success' => 'Account Deleted']);
     }
+
 }

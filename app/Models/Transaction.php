@@ -37,4 +37,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(Account::class);
     }
+
+    public function transactionCategory()
+    {
+        return $this->belongsTo(TransactionCategory::class);
+    }
 }

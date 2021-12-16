@@ -18,7 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('name')->unique();
             $table->string('balance');
             $table->string('account_number')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

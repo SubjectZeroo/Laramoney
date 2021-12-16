@@ -25,4 +25,9 @@ class Account extends Model
     {
         return static::find($id)->delete();
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

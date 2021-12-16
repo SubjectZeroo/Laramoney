@@ -1,5 +1,29 @@
 jQuery(function (){
 
+    $('#table-transaction-by-account').DataTable({
+        dom: 'lBfrtip',
+        buttons: [{
+            extend: 'collection',
+            className: "btn-primary",
+            text: '<i class="fas fa-file-export"></i> Exportar',
+            buttons:
+            [
+                {extend: 'excelHtml5', text: '<i class="far fa-file-excel"></i> Excel',  titleAttr: 'Excel'},
+                {extend: 'pdfHtml5', text:'<i class="far fa-file-pdf"></i> PDF', titleAttr: 'PDF'},
+                ,
+                'colvis'
+
+            ],
+
+          }],
+          responsive: true,
+          autoWidth: false,
+        //   processing: true,
+        //   serverSide: true,
+          orderCellsTop: true,
+          fixedHeader: true,
+    });
+
     var tableAccounts = $('#table-accounts').DataTable({
         dom: 'lBfrtip',
         buttons: [{
@@ -43,6 +67,8 @@ jQuery(function (){
         ]
 
     });
+
+
 
      //// Apply the search
      tableAccounts.columns().every(function (index) {
@@ -101,8 +127,6 @@ jQuery(function (){
             }
         })
     });
-
-    $(".dropdown-toggle").dropdown();
 
 });
 

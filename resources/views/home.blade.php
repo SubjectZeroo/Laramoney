@@ -246,6 +246,7 @@
                     .legend()
                     .tooltip(),
             });
+
         </script>
     @stop
 </x-layout>

@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\ExpenseByCategoryChart::class,
             \App\Charts\IncomeByCategoryChart::class,
             \App\Charts\BudgetByMonthChart::class,
+            \App\Charts\BalanceByAccountChart::class,
         ]);
     }
 }
