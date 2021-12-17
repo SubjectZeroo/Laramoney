@@ -144,7 +144,7 @@ class RoleSeeder extends Seeder
 
 
         /**
-         * Permisos de goals
+         * Permisos de categories
          */
 
         Permission::create([
@@ -165,31 +165,6 @@ class RoleSeeder extends Seeder
         Permission::create([
             'name' => 'categories.destroy',
             'description' => 'Eliminar Categorias'
-        ])->syncRoles([]);
-
-
-        /**
-         * Permisos de goals
-         */
-
-        Permission::create([
-            'name' => 'users.index',
-            'description' => 'Listado de Usuarios'
-        ])->syncRoles([$roleNormalUser]);
-
-        Permission::create([
-            'name' => 'users.create',
-            'description' => 'Crear Usuarios'
-        ])->syncRoles([$roleNormalUser]);
-
-        Permission::create([
-            'name' => 'users.edit',
-            'description' => 'Editar Usuarios'
-        ])->syncRoles([$roleNormalUser]);
-
-        Permission::create([
-            'name' => 'users.destroy',
-            'description' => 'Eliminar Usuarios'
         ])->syncRoles([]);
     }
 }

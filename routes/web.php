@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/accounts/balance-account/{account}', App\Http\Controllers\AccountController::class, 'BalanceByAccount');
     Route::resource('/budgets', App\Http\Controllers\BudgetController::class);
     Route::resource('/goals', App\Http\Controllers\GoalController::class);
+    Route::post('/goals/deposit', [App\Http\Controllers\GoalController::class, 'deposit'])->name('goals.deposit');
     Route::resource('/categories', App\Http\Controllers\CategoryController::class);
     Route::resource('/users', App\Http\Controllers\UserController::class);
 });
