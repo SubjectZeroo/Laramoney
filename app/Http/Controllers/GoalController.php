@@ -143,4 +143,31 @@ class GoalController extends Controller
         $goal->deleteData($id);
         return response()->json(['success' => 'Goal Deleted']);
     }
+
+
+    /**
+     * add data deposit to database
+     *
+     * @param integer $id
+     * @param double  $deposit
+     * @return object
+     */
+    public function deposit(Request $request)
+    {
+
+
+        $request->validate([
+            'deposit' => ['required', 'max:255'],
+        ]);
+
+        $getDeposit = Goal::where('id', $request->goal_id)->select('deposit')->get();
+
+
+        Goal::where('id', $request->goal_id)
+
+            ->update(['deposit' => $request->deposit + $getDeposit[0]->deposit]);
+
+
+        return redirect()->route('goals.index')->withSuccessMessage('Goal Updated');;
+    }
 }

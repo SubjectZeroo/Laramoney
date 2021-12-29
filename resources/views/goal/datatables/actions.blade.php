@@ -26,23 +26,34 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <form method="POST" action="{{ route('goals.deposit') }}">
+                @csrf
+                {{-- @method('PUT') --}}
+                <div class="modal-body">
+
+
                     <div class="form-group">
                         <label class="sr-only" for="deposit">Deposit</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">$</div>
                             </div>
-                            <input type="text" class="form-control" id="deposit" name="deposit" placeholder="Deposit">
+                            <input type="text" name="goal_id" value="{{ $id }}" hidden>
+                            <input type="text" class="form-control {{ $errors->has('deposit') ? 'is-invalid' : '' }}"
+                                id="deposit" name="deposit" placeholder="Deposit">
+                            @error('deposit')
+                                <div class=" invalid-feedback">
+                                    {{ $errors->first('deposit') }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
