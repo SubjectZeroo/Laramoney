@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center align-items-center">
-    <button title="Deposit" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#exampleModal">
+    <button title="Deposit" class="btn btn-outline-primary ml-2" data-toggle="modal"
+        data-target="#ModalDeposit-{{ $id }}">
         <i class="far fa-plus-square"></i>
     </button>
     @can('goals.edit')
@@ -16,8 +17,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="ModalDeposit-{{ $id }}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,7 +39,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">$</div>
                             </div>
-                            <input type="text" name="goal_id" value="{{ $id }}" hidden>
+                            <input type="text" name="goal_id" value="{{ $id }}">
                             <input type="text" class="form-control {{ $errors->has('deposit') ? 'is-invalid' : '' }}"
                                 id="deposit" name="deposit" placeholder="Deposit">
                             @error('deposit')
