@@ -116,21 +116,25 @@
                             </div>
                         @enderror
                     </div>
-
-
-
                 </div>
                 <div class="form-row">
                     <div class=" form-group col-md-4">
                         <label for="date">Date</label>
-                        <input type="text"
-                            class="form-control {{ $errors->has('transaction_date') ? 'is-invalid' : '' }}"
-                            name="transaction_date" id="transaction_date" value="{{ old('transaction_date') }}">
-                        @error('transaction_date')
-                            <div class=" invalid-feedback">
-                                {{ $errors->first('transaction_date') }}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-calendar-week"></i>
+                                </span>
                             </div>
-                        @enderror
+                            <input type="text"
+                                class="form-control {{ $errors->has('transaction_date') ? 'is-invalid' : '' }}"
+                                name="transaction_date" id="transaction_date" value="{{ old('transaction_date') }}">
+                            @error('transaction_date')
+                                <div class=" invalid-feedback">
+                                    {{ $errors->first('transaction_date') }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="description">Description</label>

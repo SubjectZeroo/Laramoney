@@ -55,13 +55,23 @@
 
                         <div class="form-group col-md-4">
                             <label for="deadline">Target Date</label>
-                            <input type="text" class="form-control {{ $errors->has('deadline') ? 'is-invalid' : '' }}"
-                                id="deadline" name="deadline" value="{{ old('deadline') }}">
-                            @error('deadline')
-                                <div class=" invalid-feedback">
-                                    {{ $errors->first('deadline') }}
+
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-calendar-week"></i>
+                                    </span>
                                 </div>
-                            @enderror
+                                <input type="text"
+                                    class="form-control {{ $errors->has('deadline') ? 'is-invalid' : '' }}" id="deadline"
+                                    name="deadline" value="{{ old('deadline') }}">
+                                @error('deadline')
+                                    <div class=" invalid-feedback">
+                                        {{ $errors->first('deadline') }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -80,7 +90,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                         </div>
                         <div class="form-group col-md-4">
                             <label for="amount">Target</label>
